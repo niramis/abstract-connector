@@ -5,16 +5,16 @@ import org.springframework.web.client.RestTemplate;
 
 public class RestSource implements Source<Integer> {
 
-    private int value;
+    private Integer value;
     private final String url = "https://www.random.org/integers/?num=1&min=10&max=20&col=1&base=10&format=plain&rnd=new";
 
     public RestSource() {
         this.value = loadValue();
     }
 
-    private int loadValue() {
+    private Integer loadValue() {
         RestTemplate restTemplate = new RestTemplate();
-        int result = Integer.valueOf(restTemplate.getForObject(url, String.class).replace("\n", ""));
+        Integer result = Integer.valueOf(restTemplate.getForObject(url, String.class).replace("\n", ""));
         return result;
     }
 
