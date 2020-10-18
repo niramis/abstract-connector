@@ -6,24 +6,24 @@ import com.main.source.Source;
 import java.util.List;
 import java.util.stream.Collectors;
 
-final public class Connector {
+public final class Connector<T> {
 
-    private final List<Source> sources;
-    private final Operation operation;
+    private final List<Source<T>> sources;
+    private final Operation<T> operation;
 
-    public int getResult() {
+    public T getResult() {
         return operation.action(sources);
     }
 
-    public Connector(ConnectorBuilder builder) {
+    public Connector(ConnectorBuilder<T> builder) {
         this.sources = builder.sources.stream().collect(Collectors.toList());
         this.operation = builder.operation;
     }
 
-    public static class ConnectorBuilder {
+    public static class ConnectorBuilder<T> {
 
-        private List<Source> sources;
-        private Operation operation;
+        private List<Source<T>> sources;
+        private Operation<T> operation;
 
         private ConnectorBuilder() {
         }
@@ -32,12 +32,12 @@ final public class Connector {
             return new ConnectorBuilder();
         }
 
-        public ConnectorBuilder setSources(List<Source> sources) {
+        public ConnectorBuilder setSources(List<Source<T>> sources) {
             this.sources = sources;
             return this;
         }
 
-        public ConnectorBuilder setOperation(Operation operation) {
+        public ConnectorBuilder setOperation(Operation<T> operation) {
             this.operation = operation;
             return this;
         }

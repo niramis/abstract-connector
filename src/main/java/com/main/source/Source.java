@@ -1,6 +1,6 @@
 package com.main.source;
 
 @FunctionalInterface
-public interface Source {
-    int getValue();
+public interface Source<T> {
+    T getValue();
 }
